@@ -4,6 +4,8 @@
 import Image from "next/image";
 
 import DateDisplay from "./Date";
+import Navlinks from "./Navlinks";
+import { Suspense } from "react";
 
 
 
@@ -36,7 +38,11 @@ const Header = () => {
               <button className="btn bg-green-800 text-white">সাইন আপ</button>
            </div>
         </div>
+  
 
+<Suspense fallback={<div className="mt-5">বিভাগগুলো লোড হচ্ছে...</div>}>
+  <Navlinks />
+</Suspense>
       </header>
     );
 };
