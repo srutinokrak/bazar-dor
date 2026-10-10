@@ -6,6 +6,7 @@ import Image from "next/image";
 import DateDisplay from "./Date";
 import Navlinks from "./Navlinks";
 import { Suspense } from "react";
+import UserInfo from "./UserInfo";
 
 
 
@@ -32,11 +33,9 @@ const Header = () => {
           <DateDisplay/>
             </div>
            </div>
-
-           <div className="flex gap-3">
-              <button className="btn">সাইন ইন</button>
-              <button className="btn bg-green-800 text-white">সাইন আপ</button>
-           </div>
+          
+          <UserInfo/>
+         
         </div>
   
 
