@@ -2,6 +2,7 @@
 import { authClient } from '@/lib/auth-client';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SignUpPage = () => {
 
@@ -9,13 +10,17 @@ const SignUpPage = () => {
         e.preventDefault()
 
         const formData = new FormData(e.target)
-        const user = Object.fromEntries(formData.entries() ) as {name: string, email:string, password:string}
+        const {name,email, password, confirmPassword} = Object.fromEntries(formData.entries() ) as {name: string, email:string, password:string, confirmPassword:string}
 
         // console.log(user);
 
+        if(password!==confirmPassword){
+          return 
+        }
+
         const { data, error } = await authClient.signUp.email({
-           ...user,
-        callbackURL: "/"
+           name,email, password,
+        callbackURL: "/",
     })
         
           if(data) {
@@ -23,11 +28,18 @@ const SignUpPage = () => {
              redirect('/')
            }
            if(error) {
+          toast.error(error.message || "something went wrong")
             console.log(error);
            }
-           
+    }
+
+    const handleGoogleSignIn = async () => {
+      await authClient.signIn.social({
+        provider: "google", 
+      })
 
     }
+
     return (
        <div className='flex flex-col items-center mt-6'>
           <div className='w-md'>
@@ -50,11 +62,12 @@ const SignUpPage = () => {
           <input name="password" type="password" className="input w-md" placeholder="কমপক্ষে ৮ অক্ষর" />
 
           <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
-          <input name="password" type="password" className="input w-md" placeholder="আবার লিখুন" />
+          <input name="confirmPassword" type="password" className="input w-md" placeholder="আবার লিখুন" />
 
           <button type='submit' className="btn bg-green-700 mt-4 text-white">অ্যাকাউন্ট তৈরি করুন</button>
         </fieldset>
       </form>
+      <button onClick={handleGoogleSignIn}  className="btn">Google দিয়ে চালিয়ে যান</button>
     </div>
     );
 };
