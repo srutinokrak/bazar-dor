@@ -1,49 +1,50 @@
-
-
-
 import Image from "next/image";
 
 import DateDisplay from "./Date";
 import Navlinks from "./Navlinks";
 import { Suspense } from "react";
 import UserInfo from "./UserInfo";
-
-
+import Link from "next/link";
 
 const Header = () => {
+  //      const date = new Date().toLocaleDateString("bn-BD", {
+  //     dateStyle: "full",
+  //   });
 
-//      const date = new Date().toLocaleDateString("bn-BD", {
-//     dateStyle: "full",
-//   });
-
- 
-    return (
-      <header className="max-w-7xl w-full mx-auto px-4 py-4">
-           <div className="relative flex justify-between ">
-           <div className="flex gap-2">
-             <Image className="bg-green-800 border rounded-xl"
-               src="/logo-icon.png"
-               alt="Bazar-dor"
-               height={40}
-               width={40}
-            
-            />
+  return (
+    <header className="max-w-7xl w-full mx-auto px-4 py-4">
+      <div className="relative flex justify-between">
+        <div className="flex ">
+           <div className="flex gap-2  items-center">
             <div>
-                <h2 className="font-bold  text-xl">বাজার দর</h2>
-          <DateDisplay/>
+              <Image
+                className="bg-green-800 border rounded-xl"
+                src="/logo-icon.png"
+                alt="Bazar-dor"
+                height={40}
+                width={40}
+              />
             </div>
-           </div>
-          
-          <UserInfo/>
-         
+            <div>
+              <Link href={"/"}>
+                <h2 className="font-bold  text-xl">বাজার দর </h2>
+              </Link>
+              <div>
+                <DateDisplay />
+               
+              </div>
+            </div>
+          </div>
         </div>
-  
 
-<Suspense fallback={<div className="mt-5">বিভাগগুলো লোড হচ্ছে...</div>}>
-  <Navlinks />
-</Suspense>
-      </header>
-    );
+        <UserInfo />
+      </div>
+
+      <Suspense fallback={<div className="mt-5">বিভাগগুলো লোড হচ্ছে...</div>}>
+        <Navlinks />
+      </Suspense>
+    </header>
+  );
 };
 
 export default Header;

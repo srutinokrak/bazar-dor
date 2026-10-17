@@ -18,7 +18,7 @@ const data: { data: Navs[]} = await res.json();
 
 
 return (
-  <div className="mt-5 flex gap-5">
+  <div className="mt-5 flex gap-5 border border-base-200  p-3">
     {data.map((nav) => (
       <Link key={nav.id} href={`/category/${nav.slug}`}>
        {nav.icon} {nav.nameBn}
