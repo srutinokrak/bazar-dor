@@ -8,7 +8,7 @@ const getProducts = async():Promise<Product[]> => {
       "https://openapi.programming-hero.com/api/bazardor/products",
     );
     const data = await res.json();
-    console.log("from productpage", data);
+  
     return data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -17,7 +17,7 @@ const getProducts = async():Promise<Product[]> => {
 };
 const DecreaseProducts = async () => {
   const productsData = await getProducts();
-  console.log(productsData);
+
   return (
     <div>
       <h2 className="text-2xl font-bold flex gap-2 items-center">
