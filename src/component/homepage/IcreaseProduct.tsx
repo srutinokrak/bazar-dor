@@ -1,7 +1,8 @@
 import React, { Suspense } from "react";
 import ProductCard from "../ProductCard";
+import { Product } from "@/types/product.types";
 
-const getProducts = async () => {
+const getProducts = async (): Promise<Product[]> => {
   try {
     const res = await fetch(
       "https://openapi.programming-hero.com/api/bazardor/products",
@@ -27,13 +28,14 @@ const IcreaseProducts = async () => {
         <span>আজ দাম বেড়েছে</span>
       </h2>
 
-      <div className="grid grid-cols-3 gap-3 ">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 ">
         {productsData
           .filter((product) => product.change?.dir === "up")
+          .toSorted((a, b) => (b.change?.pct ?? 0) - (a.change?.pct ?? 0))
           .slice(0, 6)
-          .map((product, ind) => {
-            return <ProductCard key={ind} product={product} />;
-          })}
+          .map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
       </div>
     </div>
   );

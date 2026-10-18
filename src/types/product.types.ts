@@ -8,7 +8,7 @@ export type Product = {
   unit: string;
   today: number;
   yesterday: number;
-  change?: {
+  change: {
     dir: "up" | "down" | "same";
     pct: number;
   };

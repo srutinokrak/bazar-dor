@@ -1,31 +1,25 @@
-import Link from "next/link";
+import CategoryNavItems from "./CategoryNavItems";
 
 interface Navs {
-      id: string;
+  id: string;
   slug: string;
   nameBn: string;
   icon: string;
-scrapable:boolean
+  scrapable: boolean;
 }
 
+const Navlinks = async () => {
+  const res = await fetch(
+    "https://api.abcz.workers.dev/api/bazardor/categories",
+  );
 
+  if (!res.ok) {
+    throw new Error("Categories load করা যায়নি");
+  }
 
-const Navlinks = async() => {
+  const data: Navs[] = await res.json();
 
-    const res = await fetch('https://api.abcz.workers.dev/api/bazardor/categories')
-   
-const data: { data: Navs[]} = await res.json();
-
-
-return (
-  <div className="mt-5 flex gap-5 border border-base-200  p-3">
-    {data.map((nav) => (
-      <Link key={nav.id} href={`/category/${nav.slug}`}>
-       {nav.icon} {nav.nameBn}
-      </Link>
-    ))}
-  </div>
-);
+  return <CategoryNavItems items={data} />;
 };
 
 export default Navlinks;

@@ -5,6 +5,8 @@ import Navlinks from "./Navlinks";
 import { Suspense } from "react";
 import UserInfo from "./UserInfo";
 import Link from "next/link";
+import PriceTicker from "./PriceTicker";
+import TickerOutsideHome from "./TickerOutsideHome";
 
 const Header = () => {
   //      const date = new Date().toLocaleDateString("bn-BD", {
@@ -43,6 +45,11 @@ const Header = () => {
       <Suspense fallback={<div className="mt-5">বিভাগগুলো লোড হচ্ছে...</div>}>
         <Navlinks />
       </Suspense>
+     <Suspense fallback={<div className="h-10 border-y border-slate-200" />}>
+  <TickerOutsideHome>
+    <PriceTicker />
+  </TickerOutsideHome>
+</Suspense>
     </header>
   );
 };

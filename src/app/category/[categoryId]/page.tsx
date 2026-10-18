@@ -1,7 +1,8 @@
 
-import NotFound from "@/app/not-found";
+
 import Sorting from "@/component/Sorting";
 import { Product } from "@/types/product.types";
+import { notFound } from "next/navigation";
 
 
 
@@ -30,7 +31,7 @@ const Category = async ({ params }: { params:Promise< { categoryId: string }> })
   );
 
   if(categoryProducts.length === 0) {
-    NotFound()
+    notFound()
   }
   return (
     <div>
@@ -43,7 +44,7 @@ const Category = async ({ params }: { params:Promise< { categoryId: string }> })
           {categoryProducts[0].categoryNameBn}
         </h2>
         <p className="text-xs text-slate-500">
-          {categoryProducts.length}টি পণ্যের আজকের দাম ও পরিবর্তন
+          {new Intl.NumberFormat("bn-BD").format(categoryProducts.length)}টি পণ্যের আজকের দাম ও পরিবর্তন
         </p>
       </div>
     </>

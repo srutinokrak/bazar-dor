@@ -1,5 +1,6 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -28,11 +29,12 @@ const SignUpPage = () => {
       name,
       email,
       password,
-      callbackURL: "/",
+    
     });
 
     if (data) {
       console.log(data);
+      toast.success("Sign up successful")
       redirect("/");
     }
     if (error) {
@@ -53,66 +55,92 @@ const SignUpPage = () => {
     });
   };
 
-  return (
-    <div className="flex flex-col items-center mt-6">
-      <div className="w-md">
-        <h1 className="text-2xl font-bold text-gray-800">
+return (
+  <main className="flex min-h-[65vh] flex-col items-center px-4 py-8">
+    <Toaster position="top-center" />
+
+    <div className="mb-5 w-full max-w-100">
+      <h1 className="text-2xl font-bold text-slate-900">
+        অ্যাকাউন্ট তৈরি করুন
+      </h1>
+      <p className="mt-1 text-sm text-slate-500">
+        বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
+      </p>
+    </div>
+
+    <form onSubmit={onSubmit} className="w-full max-w-100">
+      <div className="rounded-xl border border-slate-200 bg-white p-5">
+        <label className="mb-1 block text-sm font-medium">নাম</label>
+        <input
+          name="name"
+          type="text"
+          className="input mb-3 w-full"
+          placeholder="যেমন: রহিম উদ্দিন"
+          required
+        />
+
+        <label className="mb-1 block text-sm font-medium">ইমেইল</label>
+        <input
+          name="email"
+          type="email"
+          className="input mb-3 w-full"
+          placeholder="you@example.com"
+          required
+        />
+
+        <label className="mb-1 block text-sm font-medium">পাসওয়ার্ড</label>
+        <input
+          name="password"
+          type="password"
+          className="input mb-3 w-full"
+          placeholder="কমপক্ষে ৮ অক্ষর"
+          required
+        />
+
+        <label className="mb-1 block text-sm font-medium">
+          পাসওয়ার্ড নিশ্চিত করুন
+        </label>
+        <input
+          name="confirmPassword"
+          type="password"
+          className="input w-full"
+          placeholder="আবার লিখুন"
+          required
+        />
+
+        <button
+          type="submit"
+          className="btn mt-4 w-full bg-green-700 text-white"
+        >
           অ্যাকাউন্ট তৈরি করুন
-        </h1>
-        <p className="text-sm text-gray-400">
-          বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
+        </button>
+
+        <div className="my-4 flex items-center gap-3 text-xs text-slate-500">
+          <span className="h-px flex-1 bg-slate-200" />
+          অথবা
+          <span className="h-px flex-1 bg-slate-200" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" onClick={handleGoogleSignIn} className="btn">
+            Google দিয়ে চালিয়ে যান
+          </button>
+          <button type="button" onClick={handleGithubSignIn} className="btn">
+            GitHub দিয়ে চালিয়ে যান
+          </button>
+        </div>
+
+        <p className="mt-4 text-center text-sm text-slate-600">
+          অ্যাকাউন্ট আছে? <Link className="text-green-700" href="/signin">সাইন ইন করুন</Link>
         </p>
       </div>
-      <form onSubmit={onSubmit}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-4">
-          <label className="label">নাম</label>
-          <input
-            name="name"
-            type="text"
-            className="input w-md"
-            placeholder="যেমন: রহিম উদ্দিন"
-          />
+    </form>
 
-          <label className="label">ইমেইল</label>
-          <input
-            name="email"
-            type="email"
-            className="input w-md"
-            placeholder="you@example.com"
-          />
-
-          <label className="label">পাসওয়ার্ড</label>
-          <input
-            name="password"
-            type="password"
-            className="input w-md"
-            placeholder="কমপক্ষে ৮ অক্ষর"
-          />
-
-          <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
-          <input
-            name="confirmPassword"
-            type="password"
-            className="input w-md"
-            placeholder="আবার লিখুন"
-          />
-
-          <button type="submit" className="btn bg-green-700 mt-4 text-white">
-            অ্যাকাউন্ট তৈরি করুন
-          </button>
-        </fieldset>
-      </form>
-
-      <div className="flex flex-cols gap-3 mt-4">
-        <button onClick={handleGoogleSignIn} className="btn">
-          Google দিয়ে চালিয়ে যান
-        </button>
-        <button onClick={handleGithubSignIn} className="btn">
-          GitHub দিয়ে চালিয়ে যান
-        </button>
-      </div>
-    </div>
-  );
+    <Link href="/" className="mt-5 text-sm text-slate-500 hover:text-green-700">
+      ← হোম পেজে ফিরে যান
+    </Link>
+  </main>
+);
 };
 
 export default SignUpPage;

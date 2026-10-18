@@ -23,7 +23,7 @@ const UserInfo = () => {
                   <img
                     className="rounded-5xl w-10 h-10 "
                     alt="Tailwind-CSS-Avatar-component"
-                    src={user?.image as string}
+                    src={user?.image as string || "https://static.vecteezy.com/system/resources/thumbnails/069/984/307/small/user-profile-icon-silhouette-of-a-man-in-a-circle-placeholder-picture-or-avatar-for-social-media-and-website-vector.jpg"}
                   />
                 </div>
               </summary>

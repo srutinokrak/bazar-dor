@@ -2,8 +2,10 @@
 import { authClient } from "@/lib/auth-client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { Suspense } from "react";
+import toast from "react-hot-toast";
 
 const page = () => {
   // const router = useRouter()
@@ -28,59 +30,46 @@ const page = () => {
     await authClient.signOut();
   };
 
-const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+ 
 
-  const formData = new FormData(e.currentTarget);
-  const name = String(formData.get("name") ?? "").trim();
-  if (!name) return;
-
-  const { error } = await authClient.updateUser({ name });
-  if (error) console.error(error);
-};
   return (
     <div className="w-3xl ">
       <h2 className="font-bold text-2xl">আমার প্রোফাইল</h2>
-      <p className="mb-5 text-sm text-gray-500">আপনার অ্যাকাউন্টের তথ্য এখানে দেখুন।</p>
+      <p className="mb-5 text-sm text-gray-500">
+        আপনার অ্যাকাউন্টের তথ্য এখানে দেখুন।
+      </p>
       <div className="flex gap-5 justify-between border border-base-300 rounded-2xl px-8 items-center">
         <div className="flex flex-row items-center">
-           {user?.image && (
-          <Image
-            src={user.image}
-            alt={user.name ?? ""}
-            width={100}
-            height={100}
-            
-          />
-        )}
+          
+            <Image
+              src={
+                user.image ||
+                "https://static.vecteezy.com/system/resources/thumbnails/069/984/307/small/user-profile-icon-silhouette-of-a-man-in-a-circle-placeholder-picture-or-avatar-for-social-media-and-website-vector.jpg"
+              }
+              alt={user.name ?? ""}
+              width={100}
+              height={100}
+              unoptimized
+            />
+         
+          <div>
+            <h2 className="font-bold">{user?.name}</h2>
+            <p className="text-sm text-gray-500">{user?.email}</p>
+          </div>
+        </div>
         <div>
-          <h2 className="font-bold">{user?.name}</h2>
-        <p className="text-sm text-gray-500">{user?.email}</p>
+          <button
+            onClick={handleSignout}
+            className=" text-red-600 border border-red-600 rounded-xl px-2 py-1"
+          >
+            ↩ সাইন আউট
+          </button>
         </div>
-        
-        </div>
-       
-        <div>
-                <button
-          onClick={handleSignout}
-          className=" text-red-600 border border-red-600 rounded-xl px-2 py-1"
-        >
-          ↩ সাইন আউট
-        </button>
-        </div>
-   
       </div>
-<form onSubmit={handleUpdateProfile}>
-    <fieldset className="fieldset  border-base-300 rounded-box  border px-10 py-7 mt-5">
-    <h3 className="text-xl">তথ্য</h3>
-
-  <label className="label text-sm font-bold ">নাম </label>
-  <input name="name" type="name" className="input w-full" placeholder="" />
-
-  <button  type='submit' className="btn bg-green-700 text-white mt-4">আপডেট </button>
-</fieldset>
-</form>
-
+<Link href={"/profile/update"}>  <button type="submit" className="btn bg-green-700 text-white mt-4 w-full">
+            আপডেট{" "}
+          </button></Link>
+     
     </div>
   );
 };

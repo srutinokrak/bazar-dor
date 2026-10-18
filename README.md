@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# বাজার দর | BazarDor
 
-## Getting Started
+**BazarDor** is a Bengali market-price companion that helps shoppers explore everyday product prices, compare market listings, and keep up with price movements in one place.
 
-First, run the development server:
+## Technologies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+| Area | Technologies |
+| --- | --- |
+| Framework | Next.js 16 (App Router), React 19 |
+| Language | TypeScript |
+| UI | Tailwind CSS 4, daisyUI 5 |
+| Authentication & data | Better Auth, MongoDB |
+| Supporting libraries | `react-hot-toast`, `react-marquee-text` |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Market price ticker** — A scrolling ticker surfaces current product prices and their price movements.
+2. **Browse by category** — Explore products through categories and open a dedicated page for each product.
+3. **Track price movements** — Separate sections highlight products with increasing and decreasing prices.
+4. **Compare market prices** — Product pages show market-wise prices and a summary to help compare listings.
+5. **User accounts** — Sign up, sign in, and access a personal profile with authenticated session support.

@@ -16,7 +16,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const change = product.change;
 
   const changeLabel =
-    change?.dir === "up" ? "↑ " : change?.dir === "down" ? "↓" : "→";
+    change?.dir === "up" ? " ▲ " : change?.dir === "down" ? " ▼" : "-";
 
   const changeColor =
     change?.dir === "up"
@@ -27,7 +27,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const unitLabels: Record<string, string> = {
     kg: "কেজি",
-    gram: "পিস",
+    piece: "পিস",
     litre: "লিটার",
     dozen: "ডজন",
   };
