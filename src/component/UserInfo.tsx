@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const UserInfo = () => {
   const { data: session } = authClient.useSession();
@@ -10,6 +11,8 @@ const UserInfo = () => {
   const handleSignout = async () => {
     await authClient.signOut();
   };
+
+  const pathname = usePathname()
 
   return (
     <div>
@@ -52,11 +55,21 @@ const UserInfo = () => {
         </div>
       ) : (
         <div className="flex gap-3">
-          <Link href={"/signin"}>
-            <button className="btn">সাইন ইন</button>
+          <Link href="/signin"
+          aria-current={pathname === '/signin' ? 'page' : undefined}
+          className={`rounded-md px-3 py-2 transition-colors ${
+            pathname === '/signin' ? "bg-green-700 text-white" : "hover:bg-base-200"
+          }`}
+          >
+            সাইন ইন
           </Link>
-          <Link href={"/signup"}>
-            <button className="btn bg-green-800 text-white">সাইন আপ</button>
+          <Link href="/signup"
+          aria-current={pathname === "/signup" ? 'page' : undefined}
+          className={`rounded-md px-3 py-2 transition-colors ${
+           pathname==="/signup" ? "bg-green-700 text-white":  "hover:bg-base-200"
+          }`}
+          >
+           সাইন আপ
           </Link>
         </div>
       )}
